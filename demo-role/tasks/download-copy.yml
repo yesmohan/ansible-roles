@@ -1,0 +1,11 @@
+---
+ - name: download war from cloud
+   get_url: url=https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war dest=/tmp/sample.war
+   become: true
+ - name: changemode 777 for war file
+   file: path=/tmp/sample.war mode=0777
+   become: true
+ - name: copy the war
+   copy: src=/tmp/sample.war dest=/var/lib/tomcat8/webapps/sample.war
+   become: true
+   notify: tomcat8 starting

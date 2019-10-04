@@ -1,0 +1,12 @@
+---
+- name: task 1 tomcat8 stop
+  service: name=tomcat8 state=stopped
+  become: true
+
+- name: task 2 remove old files in webapps folder
+  shell: rm -f /var/lib/tomcat8/webapps/*.war
+  become: true
+ 
+- name: remove old war file from staging area
+  file: path=/tmp/sample.war state=absent
+  become: true
